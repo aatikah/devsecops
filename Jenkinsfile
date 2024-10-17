@@ -3,7 +3,7 @@ pipeline{
     label 'jenkins-slave'
   }
   stages{
-    stage{
+    stage('Testing'){
       steps {
         script{
           sh 'echo "Hello from Slave Node"'
