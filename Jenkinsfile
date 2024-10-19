@@ -19,7 +19,7 @@ pipeline{
           docker run --rm -v $(pwd):/path -v $(pwd)/.gitleaks.toml:/.gitleaks.toml zricethezav/gitleaks:latest detect --source /path --config /.gitleaks.toml --report-format json --report-path /path/gitleaks-report.json || true
           '''
           // Archive the report as an Artifacts
-          arichiveArtifacts artifacts: 'gitleaks-report.json', allowEmptyArchive: true
+          archiveArtifacts artifacts: 'gitleaks-report.json', allowEmptyArchive: true
           
           // Display the contents of the report in a separate step
           script{
