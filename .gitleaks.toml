@@ -1,0 +1,11 @@
+[[rules]]
+id = "generic_api_key"
+description = "Generic API Key"
+regex = "(?i)(api[_-]?key|api[_-]?secret|access[_-]?key|access[_-]?secret|secret[_-]?key)([\"=:\\s]{0,5})[a-zA-Z0-9]{32,}"
+tags = ["key", "API", "generic"]
+
+[[rules]]
+id = "generic_secret"
+description = "Generic Secret"
+regex = "(?i)(secret|password|credentials)([\"=:\\s]{0,5})[a-zA-Z0-9!@#$%^&*()_+\\-=\\[\\]{};':\"\",.<>?]{8,}"
+tags = ["secret", "generic"]
