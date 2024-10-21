@@ -62,7 +62,7 @@ pipeline{
         
       }
     }
-    stage(SAST With Bandit){
+    stage('SAST With Bandit'){
       steps{
         script{
           // Run scan with Bandit and generate report
@@ -73,6 +73,7 @@ pipeline{
             pip install bandit
 
             bandit -r . -f json -o bandit-report.json
+            deactivate
           
             '''
         }
