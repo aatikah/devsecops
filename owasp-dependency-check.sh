@@ -18,16 +18,7 @@ fi
 # Make sure we are using the latest version
 docker pull owasp/dependency-check:$DC_VERSION
 
-# Remove the existing database files if they exist
-if [ -f "$DB_FILE" ]; then
-    echo "Removing existing database file: $DB_FILE"
-    rm "$DB_FILE"
-fi
 
-if [ -f "$TRACE_DB_FILE" ]; then
-    echo "Removing existing trace database file: $TRACE_DB_FILE"
-    rm "$TRACE_DB_FILE"
-fi
     
 docker run --rm \
     -e user=$USER \
