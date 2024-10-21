@@ -62,6 +62,22 @@ pipeline{
         
       }
     }
+    stage(SAST With Bandit){
+      steps{
+        script{
+          // Run scan with Bandit and generate report
+          sh...
+            python3 -m venv bandit_venv
+            . bandit_venv/bin/activate
+            pip install --upgrade pip
+            pip install bandit
+
+            bandit -r . -f json -o bandit-report.json
+          
+            '''
+        }
+      }
+    }
     
   }
 }
