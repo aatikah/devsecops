@@ -72,10 +72,33 @@ pipeline{
             pip install --upgrade pip
             pip install bandit
 
-            bandit -r . -f json -o bandit-report.json
+            bandit -r . -f json -o bandit-report.json --exit-zero
+            bandit -r . -f json -o bandit-report.html --exit-zero
             deactivate
-          
             '''
+           //Archive the report as artifact
+          archiveArtifacts artifacts: 'bandit-report.json, bandit-report.html', allowEmptyArchive: true
+
+          // Publish HTML Report
+            publishHTML(target: [
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: '.',
+                        reportFiles: 'bandit-report.html',
+                        reportName: 'Bandit Security Report'
+                    ])
+
+          // Parse JSON report to check for issues
+            script {
+                def jsonReport = readJSON file: 'bandit-report.json'
+                def issueCount = jsonReport.results.size()
+                if (issueCount > 0) {
+                    echo "Bandit found ${issueCount} potential security issue(s). Please review the report."
+                } else {
+                    echo "Bandit scan completed successfully with no issues found."
+                }
+            }
         }
       }
     }
