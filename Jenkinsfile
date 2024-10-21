@@ -38,7 +38,7 @@ pipeline{
           sh 'bash owasp-dependency-check.sh'
 
           //Archive the report as artifact
-          archiveArtifacts artifacts: 'dependency-check-report.json', 'dependency-check-report.html', 'dependency-check-report.xml' allowEmptyArchive: true
+          archiveArtifacts artifacts: 'dependency-check-report.json', 'dependency-check-report.html', 'dependency-check-report.xml', allowEmptyArchive: true
           // Publish HTML Report
             publishHTML(target: [
                         allowMissing: false,
