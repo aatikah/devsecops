@@ -18,6 +18,12 @@ fi
 # Make sure we are using the latest version
 docker pull owasp/dependency-check:$DC_VERSION
 
+# Purge the existing database to avoid incompatibility/corruption issues
+docker run --rm \
+    --volume "$DATA_DIRECTORY":/usr/share/dependency-check/data:z \
+    owasp/dependency-check:$DC_VERSION \
+    --purge
+    
 docker run --rm \
     -e user=$USER \
     -u $(id -u ${USER}):$(id -g ${USER}) \
