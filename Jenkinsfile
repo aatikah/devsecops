@@ -56,8 +56,8 @@ pipeline{
                 if (fileExists('dependency-check-report.json')) {
                     def jsonReport = readJSON file: 'dependency-check-report.json'
                     def vulnerabilities = jsonReport.dependencies.collect { it.vulnerabilities ?: [] }.flatten()
-                    def highVulnerabilities = vulnerabilities.findAll { it.cvssv3?.baseScore >= 3 }
-                    error "OWASP Dependency-Check found ${vulnerabilities.size()} vulnerabilities, ${highVulnerabilities.size()} of which are high severity (CVSS >= 7.0)"
+                    def highVulnerabilities = vulnerabilities.findAll { it.cvssv3?.baseScore >= 9 }
+                    error "OWASP Dependency-Check found ${vulnerabilities.size()} vulnerabilities, ${highVulnerabilities.size()} of which are high severity (CVSS >= 9.0)"
                 } else {
                     echo "Dependency-Check JSON report not found. The scan may have failed."
                 }
