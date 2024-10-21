@@ -66,7 +66,7 @@ pipeline{
       steps{
         script{
           // Run scan with Bandit and generate report
-          sh...
+          sh ...
             python3 -m venv bandit_venv
             . bandit_venv/bin/activate
             pip install --upgrade pip
