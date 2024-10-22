@@ -32,6 +32,6 @@ docker run --rm \
     --format "ALL" \
     --project "$DC_PROJECT" \
     --out /report \
-    --nvd-nvdApiKey "$NVD_API_KEY"
+    --nvdApiKey "$NVD_API_KEY"
     # Use suppression like this: (where /src == $pwd)
     # --suppression "/src/security/dependency-check-suppression.xml"
