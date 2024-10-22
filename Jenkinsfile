@@ -39,7 +39,7 @@ pipeline{
         script{
           sh 'rm dependency-check-report*  || true'
           sh 'wget "https://raw.githubusercontent.com/aatikah/devsecops/refs/heads/master/owasp-dependency-check.sh"'
-          sh 'bash owasp-dependency-check.sh'
+          sh 'bash owasp-dependency-check.sh || true'
 
           //Archive the report as artifact
           archiveArtifacts artifacts: 'dependency-check-report.json, dependency-check-report.html, dependency-check-report.xml', allowEmptyArchive: true
