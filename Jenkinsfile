@@ -2,6 +2,10 @@ pipeline{
   agent {
     label 'jenkins-slave'
   }
+  environment{
+    DOCKER_REGISTRY = 'https://index.docker.io/v1/'
+    DOCKER_IMAGE = 'aatikah/django-app'
+  }
   stages{
     
     stage('Testing'){
@@ -99,6 +103,29 @@ pipeline{
                     echo "Bandit scan completed successfully with no issues found."
                 }
             }
+        }
+      }
+    }
+
+    stage ('Build and Pus Image to DockerHub'){
+      steps{
+        script{
+          // Wrap the commands with the function withCredential to securely login to the docker account
+          withCredentials([usernamePassword(credentialsId:'DOCKER_CREDENTIAL', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]){
+            // Build the Docker Image
+            sh 'docker build -t ${DOCKER_IMAGE}'
+            
+            // Login to Docker Repo
+            sh '''
+              set +x
+                echo "$DOCKER_PASSWORD" | docker login $DOCKER_REGISTRY -u "$DOCKER_USERNAME" --password-stdin
+              set -x
+            '''
+            // Push Image to DockerHub
+            sh 'docker push &{DOCKER_IMAGE}'
+            // Clean up by removing ledtover credentials
+            sh 'rm -f /home/jenkins/.docker/config.json'
+          }
         }
       }
     }
