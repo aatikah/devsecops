@@ -113,7 +113,7 @@ pipeline{
           // Wrap the commands with the function withCredential to securely login to the docker account
           withCredentials([usernamePassword(credentialsId:'DOCKER_CREDENTIAL', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]){
             // Build the Docker Image
-            sh 'docker build -t ${DOCKER_IMAGE}'
+            sh 'docker build -t ${DOCKER_IMAGE} .'
             
             // Login to Docker Repo
             sh '''
