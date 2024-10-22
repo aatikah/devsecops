@@ -122,7 +122,8 @@ pipeline{
               set -x
             '''
             // Push Image to DockerHub
-            sh 'docker push &{DOCKER_IMAGE}'
+            sh 'docker push ${DOCKER_IMAGE}'
+            
             // Clean up by removing ledtover credentials
             sh 'rm -f /home/jenkins/.docker/config.json'
           }
