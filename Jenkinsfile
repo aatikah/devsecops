@@ -158,7 +158,7 @@ pipeline{
     				'''
 				// Verifying the deployment
 				sh '''
-					ssh -o StrictHostKeyChecking=no ${remoteUser}@${} '
+					ssh -o StrictHostKeyChecking=no ${remoteUser}@${remoteHost} '
 		                        if docker ps | grep -q ${dockerImage}; then
 		                            echo "Deployment successful"
 		                        else
