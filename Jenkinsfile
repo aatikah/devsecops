@@ -137,7 +137,7 @@ pipeline{
 	stage('Deploy Image to GCP'){
 		steps{
 			script{
-				def remoteUser = 'jenikns-slave'
+				def remoteUser = 'jenkins-slave'
 				def dockerImage = 'aatikah/django-app'
 				// Stop and remove the old container if it exit
 				sh '''
