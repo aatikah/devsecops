@@ -135,42 +135,7 @@ pipeline{
     }
 
 	  
-	stage('Deploy Image to GCP'){
-		steps{
-			script{
-				def remoteUser = 'jenikns-slave'
-				def dockerImage = 'aatikah/django-app'
-				// Stop and remove the old container if it exit
-				sh '''
-					 ssh -o StrictHostKeyChecking=no ${remoteUser}@${remoteHost} '
-		                        container_id=\$(docker ps -q --filter ancestor=${dockerImage})
-		                        if [ ! -z "\$container_id" ]; then
-		                            docker stop \$container_id
-		                            docker rm \$container_id
-		                        fi
-		                    '
-      				'''
-				//Pull the latest image and run it
-				sh '''
-					 ssh -o StrictHostKeyChecking=no ${remoteUser}@${remoteHost} '
-		                        docker pull ${dockerImage} && 
-		                        docker run -d --restart unless-stopped -p 8000:8000 --name django-app ${dockerImage}
-		                    '
-    				'''
-				// Verifying the deployment
-				sh '''
-					ssh -o StrictHostKeyChecking=no ${remoteUser}@${} '
-		                        if docker ps | grep -q ${dockerImage}; then
-		                            echo "Deployment successful"
-		                        else
-		                            echo "Deployment failed"
-		                            exit 1
-		                        fi
-		                    '
-    				'''
-			}
-		}
-	}
+	
      
     
   }
