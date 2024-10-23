@@ -139,6 +139,8 @@ pipeline{
 			script{
 				def remoteUser = 'jenkins-slave'
 				def dockerImage = 'aatikah/django-app'
+				
+				sshagent(['MASTER_PRIVATE_KEY']){
 				// Stop and remove the old container if it exit
 				sh '''
 					 ssh -o StrictHostKeyChecking=no ${remoteUser}@${remoteHost} '
@@ -167,6 +169,7 @@ pipeline{
 		                        fi
 		                    '
     				'''
+				}
 			}
 		}
 	}  
