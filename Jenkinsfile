@@ -179,7 +179,7 @@ pipeline{
 				def zapHome = '/opt/zaproxy' // Path to ZAP Installation
 				def reportNameHtml = 'zap-scan-report.html'
 				def reportNameXml = 'zap-scan-report.xml'
-				def reportNamejson = 'zap-scan-report.json'
+				def reportNameJson = 'zap-scan-report.json'
 
 				// Perform Scan
 				sh """
@@ -196,10 +196,10 @@ pipeline{
      					${zapHome}/zap.sh -cmd \
      					-quickurl http://${remoteHost} \
 	  				-quickprogress \
-       					-quickout ${WORKSPACE}/${reportNamejson}
+       					-quickout ${WORKSPACE}/${reportNameJson}
     				"""
 				//Archive the report as artifact
-          		archiveArtifacts artifacts: '${reportNameHtml}, ${reportNameXml}, ${reportNamejson}', allowEmptyArchive: true, fingerprint: true
+          		archiveArtifacts artifacts: "${reportNameHtml}, ${reportNameXml}, ${reportNameJson}", allowEmptyArchive: true, fingerprint: true
 
 				// Publish HTML Report
 		            publishHTML(target: [
@@ -207,7 +207,7 @@ pipeline{
 				alwaysLinkToLastBuild: false,
 				keepAll: true,
 				reportDir: '.',
-				reportFiles: '${reportNameHtml}',
+				reportFiles: "${reportNameHtml}",
 				reportName: 'ZAP Security Report'
 			    ])
 
