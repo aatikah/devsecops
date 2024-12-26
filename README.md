@@ -1,49 +1,135 @@
-django.nV
-=========
 
-django.nV is a purposefully vulnerable Django application provided by [nVisium](https://www.nvisium.com/).
+# django.nV
 
-### System Requirements & Setup 
+This application is a forked repository known as django.nV. It is a deliberately vulnerable Django application developed by [nVisium](https://www.nvisium.com/). It serves as a practical tool for security professionals and developers to identify, understand, and mitigate common vulnerabilities within Django applications.
 
-First, make sure Python 3.4+ is installed on your machine. On OSX, this can be installed with Homebrew (eg. `brew install python3`). If you receive an error about conflicting PYTHONPATH, try updating the variable to reflect your python version.
+In this project, I am using the application to set up and simulate a DevSecOps project using docker and Jenkins
 
+---
+
+## Features
+
+- **Purposeful Vulnerabilities**: Includes a range of security flaws commonly found in Django applications, offering a hands-on environment for learning and testing.
+- **CI/CD Pipeline Integration**: Incorporates security scanning tools within the pipeline to ensure DevSecOps best practices.
+- **Docker Support**: Easily containerized for consistent deployments.
+- **Educational Resource**: Ideal for training sessions, workshops, and self-study to enhance security skills.
+
+---
+
+## System Requirements
+
+- **Python**: Version 3.4 or higher.
+- **Docker & Docker Compose**: Installed on your system.
+- **Jenkins**: To execute the CI/CD pipeline.
+- **Virtualenv**: For creating isolated Python environments.
+
+---
+
+## Setup Instructions
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/aatikah/devsecops.git
+cd devsecops
 ```
-export PYTHONPATH="/usr/local/lib/python3.4/site-packages"
+
+### 2. Run Using Docker
+The Dockerfile is configured for containerizing the Django application. Key features include:
+
+Installing Python dependencies.
+Running database migrations during the build process.
+Exposing the application on port 8000.
+
+To build and run the application using Docker:
+
+```sh
+docker build -t django.nv .
+docker run -p 8000:8000 django.nv
+```
+Access the application at http://127.0.0.1:8000/.
+
+### 3. Local Environment Setup (Optional)
+If you prefer to run the application without Docker:
+
+- **Set Up Virtual Environment:**
+```sh
+pip install virtualenv
+virtualenv -p python3 venv
+source venv/bin/activate
 ```
 
-Before using django.nV, you'll also need to install virtualenv. You should be able to use `pip install virtualenv`, using the pip package manager, to install it. On most systems, pip should be installed alongside python.
+- **Install Dependencies:**
 
-To set up the repository, use `virtualenv -p python3 venv`, which will create a virtualenv using Python 3. To enter this environment, run `source venv/bin/activate`. You should see your $PS1 update to include `(venv)` to remind you that you are in the virtual environment. You can also leave the environment by simply typing `deactivate`.
+```sh
+pip install -r requirements.txt
+```
+- **Apply Migrations:**
 
-### Installation of Dependencies
+```sh
+python manage.py migrate
+```
+- **Run the Application:**
 
-To install the dependencies, simply run `pip install -r requirements.txt`.
+```sh
+python manage.py runserver
+```
+## CI/CD Pipeline with Jenkins
+The repository includes a Jenkinsfile for implementing a CI/CD pipeline with integrated security scans:
 
-### Database Setup
+### Key Stages:
+1. **Build:** Creates the Docker image using the provided Dockerfile.
+2. **Security** Scans:
+    - OWASP Dependency Check: Executes the owasp-dependency-check.sh script to scan for vulnerabilities in dependencies.
+    - Gitleaks: Uses the .gitleaks.toml configuration file to scan for secrets in the codebase.
+3. **Testing:** Runs the application tests.
+4. **Deploy:** Pushes the Docker image to a registry and deploys the application.
 
-django.nV provides you with a script automatically creates the database as well as populates it with data. This script is titled `reset_db.sh`. django.nV does not ship with the database, so in order to run the application properly, you'll need to use this script:
+---
+### Security Tools
 
-    ./reset_db.sh
+The Jenkinsfile  incorporates various stages of a CI/CD pipeline, including static analysis, vulnerability scanning, Docker image creation, and deployment. Here's a quick breakdown of the functionality:
 
-You can also use the same script to reset the database if you make any changes.
+1. **Agent Configuration:**
+    - Specifies a **jenkins-slave** label for running the pipeline stages.
+      
+2. **Environment Variables:**
 
-### Running the application
-To run the app in its application folder type:
+    - Sets variables like DOCKER_REGISTRY, DOCKER_IMAGE, and remoteHost for use in multiple stages.
 
-    ./runapp.sh
+3. **Stages:**
 
-You should then be able to access the web interface at `http://localhost:8000/`.
+    - **Testing:** Confirms that the pipeline runs on the slave node.
+    - **Gitleaks Scan:** Runs a Gitleaks scan for secrets in the repository, archives the report, and displays its contents.
+      A .gitleaks.toml configuration file is included for scanning the repository for sensitive information. To run manually:
 
-### Tutorials
+        ```sh
+        gitleaks detect --config=.gitleaks.toml
+        ```
+    - **Dependency Check (SCA):** Uses OWASP Dependency-Check for software composition analysis, archives reports, and publishes HTML             output.
+      The owasp-dependency-check.sh script performs dependency analysis to identify known vulnerabilities. To run the script manually:
+        ```sh
+        ./owasp-dependency-check.sh
+        ```
+    - **Bandit SAST:** Runs Bandit for Python static analysis, archives reports, and publishes HTML output.
+    - **Docker Build and Push:** Builds a Docker image, logs in to Docker Hub, and pushes the image to the repository.
+    - **Deployment to GCP:** Deploys the Docker image to a GCP VM via SSH, ensuring the container restarts automatically.
+    - **OWASP ZAP DAST:** Runs a ZAP security scan on the deployed application, archives reports, and evaluates vulnerabilities.
 
-django.nV comes with a series of writeups for the vulnerabilities we've added to the code. Each tutorial comes with a description of the vuln, a hint to where to find it, and then the exact bug and how it could be remedied.
+---
+### Key Features:
 
-You can access these tutorials within the app at `http://localhost:8000/taskManager/tutorials/`, or by clicking on the 'Tutorials' link in the top-right of the web interface.
+- **Error Handling:** Uses **|| true** and specific conditions to allow pipeline continuation despite failures.
+- **Report Archiving:** Archives JSON and HTML reports for vulnerability and static analysis stages.
+- **HTML Publishing:** Publishes HTML reports for easy visualization of scan results.
+- **Parsing JSON Reports:** Extracts and logs details about vulnerabilities from JSON reports for both Dependency-Check and ZAP.
 
-### Mail ###
+---
+### Suggestions for Optimization:
 
-The only mail sent by the app is for the "Forgot Password" feature. You can use the built-in Python mailserver for those messages.
+- **Error Handling Consistency:** For ZAP high-risk vulnerabilities, you could use a more unified handling mechanism to fail or mark the build unstable based on severity.
+- **Security Enhancements:** Remove leftover credentials securely. For example, ensure the Docker config cleanup step handles all cases.
+- **Performance:** Parallelize independent stages (e.g., SAST, Dependency Check) to reduce execution time.
 
-    python -m smtpd -n -c DebuggingServer localhost:1025
 
-If you prefer to use your own mailserver, simply add your settings to `settings.py`.
+
