@@ -6,9 +6,8 @@ pipeline{
     DOCKER_REGISTRY = 'https://index.docker.io/v1/'
     DOCKER_IMAGE = 'aatikah/django-app'
     remoteHost = '10.0.1.5'
-
-    
   }
+	
   stages{
     
     stage('Testing'){
