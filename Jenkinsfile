@@ -224,7 +224,7 @@ pipeline{
                // error "OWASP ZAP scan found high-risk vulnerabilities. Check the ZAP report for details."
 		echo "OWASP ZAP scan found high-risk vulnerabilities. Check the ZAP report for details."
 		// Set a flag indicating failure
-    		currentBuild.result = 'SUCCESS'
+    		currentBuild.result = 'FAILURE'
             }
 			
 			}
