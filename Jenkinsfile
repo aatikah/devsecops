@@ -126,7 +126,7 @@ pipeline{
             // Push Image to DockerHub
             sh 'docker push ${DOCKER_IMAGE}'
             
-            // Clean up by removing ledtover credentials
+            // Clean up by removing leftover credentials
             sh 'rm -f /home/jenkins/.docker/config.json'
           }
         }
