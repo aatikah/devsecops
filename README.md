@@ -1,3 +1,9 @@
+# For Detailed Step by Step Guide
+You can find detailed step by step guide on creating this project on the Medium posts I created:
+
+[**PART 1: Introduction and Prerequisites**](https://link.medium.com/9Dy53khoNQb).
+
+---
 
 # django.nV
 
