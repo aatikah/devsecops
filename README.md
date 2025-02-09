@@ -3,6 +3,8 @@ You can find detailed step by step guide on creating this project on the Medium 
 
 [**PART 1: Introduction and Prerequisites**](https://link.medium.com/9Dy53khoNQb).
 
+[**PART 2: Setting Up the Target Application on GitHub**](https://link.medium.com/om0MGh6kRQb).
+
 ---
 
 # django.nV
