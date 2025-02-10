@@ -5,6 +5,8 @@ You can find detailed step by step guide on creating this project on the Medium 
 
 [**PART 2: Setting Up the Target Application on GitHub**](https://link.medium.com/om0MGh6kRQb).
 
+[**PART 3: Creating a Custom VPC Network in GCP**](https://link.medium.com/PCEUsEVpRQb).
+
 ---
 
 # django.nV
