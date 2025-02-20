@@ -7,6 +7,14 @@ You can find detailed step by step guide on creating this project on the Medium 
 
 [**PART 3: Creating a Custom VPC Network in GCP**](https://link.medium.com/PCEUsEVpRQb).
 
+[**PART 4: Setting Up the Master Server in GCP**](https://link.medium.com/n6TCTUFH8Qb).
+
+[**PART 5: Setting Up the Slave Node (Agent) in GCP**](https://link.medium.com/y537HQKH8Qb).
+
+[**PART 6: Creating a New Pipeline Project**](https://link.medium.com/Y3nLEEOH8Qb).
+
+[**PART 7: Scanning for Secrets Using Gitleaks**](https://link.medium.com/tzJiezEO7Qb).
+
 ---
 
 # django.nV
