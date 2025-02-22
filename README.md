@@ -15,6 +15,8 @@ You can find detailed step by step guide on creating this project on the Medium 
 
 [**PART 7: Scanning for Secrets Using Gitleaks**](https://link.medium.com/tzJiezEO7Qb).
 
+[**PART 8: Vulnerability Detection with OWASP Dependency-Check**](https://link.medium.com/vATqjct79Qb).
+
 ---
 
 # django.nV
