@@ -17,6 +17,10 @@ You can find detailed step by step guide on creating this project on the Medium 
 
 [**PART 8: Vulnerability Detection with OWASP Dependency-Check**](https://link.medium.com/vATqjct79Qb).
 
+[**PART 9: Python Security Scanning Using Bandit**](https://medium.com/@abuabdillah5444/step-by-step-guide-to-devsecops-ci-cd-pipeline-with-jenkins-part-9-python-security-scanning-d7bacb79770c).
+
+[**PART 10: Building and Pushing Docker Images to Docker Hub**](https://medium.com/@abuabdillah5444/step-by-step-guide-to-devsecops-ci-cd-pipeline-with-jenkins-part-10-building-and-pushing-docker-04c1e0e8fd11).
+
 ---
 
 # django.nV
