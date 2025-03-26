@@ -21,6 +21,10 @@ You can find detailed step by step guide on creating this project on the Medium 
 
 [**PART 10: Building and Pushing Docker Images to Docker Hub**](https://medium.com/@abuabdillah5444/step-by-step-guide-to-devsecops-ci-cd-pipeline-with-jenkins-part-10-building-and-pushing-docker-04c1e0e8fd11).
 
+[**PART 11: Deploying Docker Images to a GCP Instance**](https://medium.com/@abuabdillah5444/step-by-step-guide-to-devsecops-ci-cd-pipeline-with-jenkins-part-11-deploying-docker-images-to-dc1456523b1d).
+
+[**PART 12: Dynamic Application Security Testing with OWASP ZAP**](https://medium.com/@abuabdillah5444/step-by-step-guide-to-devsecops-ci-cd-pipeline-with-jenkins-part-12-dynamic-application-7b5e235c0945).
+
 ---
 
 # django.nV
