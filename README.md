@@ -159,5 +159,8 @@ The Jenkinsfile  incorporates various stages of a CI/CD pipeline, including stat
 - **Security Enhancements:** Remove leftover credentials securely. For example, ensure the Docker config cleanup step handles all cases.
 - **Performance:** Parallelize independent stages (e.g., SAST, Dependency Check) to reduce execution time.
 
+---
 
-
+**⭐ If you find this project helpful, please give it a star!**
+- Support me- [buymeacoffee.com/aatikah](https://buymeacoffee.com/aatikah)
+- Connect with me on LinkedIn: [LinkedIn Profile](https://www.linkedin.com/in/abdulhakeem-sulaiman/)
